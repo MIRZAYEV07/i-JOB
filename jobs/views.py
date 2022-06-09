@@ -27,6 +27,7 @@ class Home(ListView):
 
 class JobListView(ListView):
     queryset = Job.objects.filter(status=True, active=True, vacancy__gte=1)
+    template_name = 'job/job_list.html'
     context_object_name = 'jobs'
 
     def get_context_data(self, **kwargs):
@@ -100,6 +101,7 @@ class JobListView(ListView):
 
 class JobDetailView(DetailView):
     queryset = Job.objects.filter(status=True, active=True, vacancy__gte=1)
+    template_name = 'job/job_detail.html'
     context_object_name = 'job'
 
     def get_context_data(self, **kwargs):
@@ -118,6 +120,7 @@ class JobDetailView(DetailView):
 
 class JobCreateView(LoginRequiredMixin, CreateView):
     model = Job
+    template_name = 'job/job_form.html'
     form_class = JobForm
 
     def form_invalid(self, form):
@@ -135,6 +138,7 @@ class JobCreateView(LoginRequiredMixin, CreateView):
 
 class JobUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Job
+    template_name = 'job/job_form.html'
     form_class = JobForm
 
     def test_func(self):
@@ -143,6 +147,7 @@ class JobUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class JobDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Job
+    template_name = 'job/applies_form.html'
     context_object_name = 'job'
 
     def test_func(self):
@@ -154,6 +159,7 @@ class JobDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class ApplyJobView(CreateView):
     model = Applies
+    template_name = 'job/applies_form.html'
     http_method_names = ['post', ]
     form_class = AppliesForm
 
