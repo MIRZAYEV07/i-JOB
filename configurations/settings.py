@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-kwg%l#vsz-oc#246pqxiyl(hyvx&^eg@32wl_g^xiag1(=(2#a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['i-job.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -65,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'configurations.urls'
@@ -143,6 +144,7 @@ STATIC_ROOT =  BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT =  BASE_DIR / 'media'
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
 # Default primary key field type
@@ -168,3 +170,4 @@ ACCOUNT_EMAIL_VERIFICATION = None
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_LOGOUT_ON_GET = True
 LOGIN_REDIRECT_URL = '/'
+
