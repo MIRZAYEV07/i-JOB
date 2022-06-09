@@ -1,0 +1,70 @@
+{% extends 'account/dash_base.html' %}
+{% block title %}Job Applicants{% endblock title %}
+{% block content %}
+	<div class="content-header">
+		<legend>appliers to {{appliers.job}}</legend>
+	</div>
+	<div class="table">
+		<table>
+		<thead>
+			<tr>
+				<th>job</th>
+				<th>name</th>
+				<th>email</th>
+				<th>cv</th>
+				<th>applied to</th>
+				<th>coverletter</th>
+				<th>Apply Status</th>
+				<th>Change To Accepted</th>
+				<th>Change To Refused</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for applier in appliers %}
+			<tr>
+				<td>
+					<a href="{% url 'job:job' applier.job.slug %}">
+						{{applier.job}}
+					</a>
+				</td>
+				<td>						
+					{{applier.name}}
+				</td>
+				<td>
+                    {{applier.email}}
+				</td>		
+				<td>
+					<a href="{{applier.cv.url}}">{{applier.cv}}</a>
+				</td>						
+				<td>{{applier.applied_to|date:'d M Y'}}</td>
+				<td title='{{applier.coverletter}}'>{{applier.coverletter|slice:"30"}}...</td>
+				<td>
+                    {% if applier.apply_status == True %}
+                        Accepted
+                    {% elif applier.apply_status == False %}
+                        Refused
+                    {% elif applier.apply_status == None %}
+                        pandding
+
+                    {% endif %}
+                </td>
+				<td>
+                    <form action="{% url 'change_apply_status' applier.id 1 %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Accepted" class="btn info">
+                    </form>
+                </td>
+				<td>
+                    <form action="{% url 'change_apply_status' applier.id 0 %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Refused" class="btn danger">
+                    </form>
+                </td>
+			</tr>
+			{% empty %}
+				<p>No a ppliers for this job</p>
+			{% endfor %}
+		</tbody>
+		</table>				
+	</div>
+{% endblock content  %}

@@ -1,0 +1,74 @@
+{% extends 'account/dash_base.html' %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+	<div class="content-header">
+		<legend>your jobs list</legend>
+		<a href="{% url 'job:create_job' %}" class="btn info">add job</a>
+	</div>
+	<div class="table">
+		<table>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Career Level</th>
+				<th>Categories</th>
+				<th>Job Type</th>
+				<th>Vacancy</th>
+				<th>Appliers</th>
+				<th>Published a	t</th>
+				<th>Status</th>
+				<th>Update</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for job in jobs %}
+			<tr>
+				<td>
+					<a href="{% url 'job:job' job.slug %}">
+						{{job.title}}
+					</a>
+				</td>
+				<td>						
+					{% for career_level in job.career_level.all %}
+					<a href="{% url 'job:jobs'%}?career_level={{career_level.id}}">{{career_level|slice:'6'}}</a>
+					{% if not forloop.last %}
+					,
+					{% endif %}
+					{% empty %}
+						no career level
+					{% endfor %}
+				</td>
+				<td>
+					{% for category in job.categories.all %}
+						<a href="{% url 'job:jobs'%}?category={{category.id}}">{{category|slice:'6'}}</a>
+						{% if not forloop.last %}
+						,
+						{% endif %}
+						{% empty %}
+							no category
+					{% endfor %}
+				</td>		
+				<td>
+					<a href="{% url 'job:jobs'%}?type={{job.job_type.id}}">{{job.job_type}}</a>
+				</td>	
+				<td>{{job.vacancy}}</td>
+				<td>
+					<a href="{% url 'job_applicants_list' job.slug %}">{{job.applies.all.count}} Applyers</a>
+				</td>						
+				<td>{{job.published_at|date:'d M Y'}}</td>
+				{% if job.active %}
+				<td><div class="btn btn-sm info">Active</div></td>
+				{% else %}
+				<td><div class="btn btn-sm warning">Inactive</div></td>
+				{% endif %}
+				<td><a href="{% url 'job:update_job' job.slug %}"><div class="btn btn-sm warning">update</div></a></td>
+				<td><a href="{% url 'job:delete_job' job.slug %}"><div class="btn btn-sm danger">delete</div></a></td>
+			</tr>
+			{% empty %}
+				<p>no jobs</p>
+			{% endfor %}
+		</tbody>
+		</table>				
+	</div>
+{% endblock content  %}

@@ -1,0 +1,147 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background-color: #2a2a2a;
+	color: #ffffffdb;
+}
+ul {
+	list-style: none;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+	color: #0288d1;
+}
+hr {
+	display: block;
+	margin: 25px 0;
+}
+p {
+	line-height: 1.8;
+	color: #d1d1d1;
+}
+span.helptext {
+  display: none;
+}
+.menu {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 11px;
+}
+.menu a  {
+	color: white;
+}
+.menu li {
+	display: inline-block;
+	margin: 0 5px;
+}
+.form {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+}
+.account {
+	min-width: 450px;
+	background: #191919;
+	padding: 40px;
+	text-align: center;
+}
+.account legend {
+	color: white;
+	font-size: 30px;
+	text-transform: uppercase;
+	text-align: center;
+	margin: 15px 0px;
+	font-weight: 500;
+}
+.account input:not(input[type='submit']):not(input[type='checkbox'])
+{
+	display: block;
+	background: none;
+	border: 2px solid #3498db;
+	text-align: center;
+	padding: 15px 10px;
+	margin: 0px auto 20px;
+	width: 300px;
+	outline: none;
+	color: white;
+	border-radius: 25px;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	-ms-border-radius: 25px;
+	-o-border-radius: 25px;
+	transition: .3s;
+	-webkit-transition: .3s;
+	-moz-transition: .3s;
+	-ms-transition: .3s;
+	-o-transition: .3s;
+}
+.account input#id_login:focus,
+.account input#id_password:focus {
+	border-color: #2ecc71;
+}
+.form-header {
+    position: absolute;
+    top: 21%;
+    left: 50%;
+    transform: translate(-50%);
+}
+.account label:not(label[for='id_remember']) {
+    display: none;
+}
+.account button[type='submit'],
+.account input[type='submit']{
+	display: block;
+	background: none;
+	border: 2px solid #2ecc71;
+	text-align: center;
+	padding: 15px 30px;
+	margin: 20px auto;
+	outline: none;
+	color: white;
+	border-radius: 25px;
+	cursor: pointer;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	-ms-border-radius: 25px;
+	-o-border-radius: 25px;
+	transition: .5s;
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	-ms-transition: .5s;
+	-o-transition: .5s;
+}
+.account button[type='submit']:hover,
+.account input[type='submit']:hover {
+	background-color: #2ecc71;
+}	
+.links {
+    display: flex;
+    justify-content: space-between;
+}
+.socialaccount_ballot {
+	display: flex;
+	justify-content: center;
+}
+.socialaccount_providers li {
+	display: inline-block;
+    width: fit-content;
+}
+.socialaccount_providers li a {
+    border: 1px solid #2ecc71;
+    padding: 5px 15px;
+    width: fit-content;
+	cursor: pointer;
+	display: block;
+	color: white;
+}
+.socialaccount_providers li:hover {
+	background-color: #2ecc71;
+}

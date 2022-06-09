@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+   <!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>Delete {{job.title}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+
+<div class="container" style="margin: 100px auto; padding: 100px; border: 1px solid #999;">
+        <form class="form" method="POST">
+            {% csrf_token %}
+            <h2 style="margin-bottom: 20px;">Are you sure you want delete {{job.title}}</h2>
+            <a href="{% url 'job:job' job.slug %}" class="btn btn-info mr-3">Cancel</a>
+            <input type="submit" value="Delete" class="btn btn-danger">
+        </form>
+</div>
+
+{% endblock content %}

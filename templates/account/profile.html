@@ -1,0 +1,32 @@
+{% extends 'account/dash_base.html' %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+<section class="content">
+	<div class="content-header">
+		<legend>User Profile</legend>
+	</div>
+	<div class="profile-content">
+		<div class="card">
+				<img src="
+				{% if user.picture %}
+					{{user.picture.url}}"
+				{% endif %}
+				 alt="person" class="card__image">
+				<p class="card__name">{{user.username}}</p>
+				<p class="card__name">{{user.email}}</p>
+				<div class="stat">
+					<div><a href="{% url 'cv' %}" class="btn btn-secondary" style="    background-color: #6c757d; color: white;">Update your CV</a></div>
+				</div>
+				<a href='{% url "account_change_password" %}' class="btn info">Change Password</a>
+		  </div>
+		<div class="form">
+			<form method="post" enctype='multipart/form-data' class="special">
+				<p class="form_p">Edit Your Account</p>
+				{% csrf_token %}
+				{{form.as_p}}
+				<input type="submit" value="save" class="btn info">
+			</form>
+		</div>
+	</div>
+</section>
+{% endblock content  %}

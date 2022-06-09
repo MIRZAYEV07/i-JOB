@@ -1,0 +1,260 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+   <!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>{{jobs.count}}+ Jobs Available</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<!-- job_listing_area_start  -->
+<div class="job_listing_area plus_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="job_filter white-bg">
+                    <div class="form_inner white-bg">
+                        <h3>Filter</h3>
+                        <form method="GET">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <input type="text" placeholder="Search keyword" name=keywords>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <select class="wide">
+                                            <option data-display="Location">Location</option>
+                                            <option value="1">Rangpur</option>
+                                            <option value="2">Dhaka </option>
+                                        </select>
+                                    </div>
+                                </div> -->
+                                <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <!-- <select class="wide" name='category'>
+                                            <option data-display="Category">Category</option>
+                                                <option value="{{category.id}}">{{category.name}}</option>
+                                        </select> -->
+                                          <div class="dropdown cq-dropdown" data-name='statuses'>
+                                            <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              Categories
+                                              <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="btndropdown">
+                                            {% for category in categories %}
+                                              <li>
+                                                  <label class="radio-btn" for='{{category.id}}'>
+                                                      <input type="checkbox" name='category' value='{{category.id}}' id='{{category.id}}'>
+                                                      {{category.name}}
+                                                  </label>
+                                              </li>
+                                              {% endfor %}
+                                            </ul>
+                                          </div>
+                                          <div class="dropdown cq-dropdown" data-name='statuses'>
+                                            <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              Country
+                                              <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="btndropdown">
+                                            {% for country in countries %}
+                                              <li>
+                                                  <label class="radio-btn" for='{{country}}'>
+                                                      <input type="checkbox" name='countries' value='{{country}}' id='{{country}}'>
+                                                      {{country.name}}
+                                                  </label>
+                                              </li>
+                                              {% endfor %}
+                                            </ul>
+                                          </div>
+                                          <div class="dropdown cq-dropdown" data-name='statuses'>
+                                            <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              Cities
+                                              <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="btndropdown">
+                                            {% for city in cities %}
+                                              <li>
+                                                  <label class="radio-btn" for='{{city}}'>
+                                                      <input type="checkbox" name='cities' value='{{city}}' id='{{city}}'>
+                                                      {{city}}
+                                                  </label>
+                                              </li>
+                                              {% endfor %}
+                                            </ul>
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <p class="m-2" >Years of experience</p>
+                                    <div class="single_field d-flex">
+                                        <!-- <select class="wide" name='experience'>
+                                            <option data-display="Experience">Min Experience</option>
+                                            <option value="1">{{i}}</option>
+                                        </select> -->
+                                        <input type="number" min="0" name='min_exp' class="form-control mr-2" style="height: 40px;" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Min">
+                                        <input type="number" min="0" name='max_exp' class="form-control" style="height: 40px;" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Max">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <div class="dropdown cq-dropdown" data-name='statuses'>
+                                            <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              Job Type
+                                              <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="btndropdown">
+                                            {% for type in job_types %}
+                                              <li>
+                                                  <label class="radio-btn" for='{{type.id}}'>
+                                                      <input type="checkbox" name='type' value='{{type.id}}' id='{{type.id}}'>
+                                                      {{type.name}}
+                                                  </label>
+                                              </li>
+                                              {% endfor %}
+
+                                            </ul>
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <!-- <select class="wide" name='carrer_levels'>
+                                            <option data-display="Carrer levels">carrer levels</option>
+                                                <option value="{{level.id}}">{{level.name}}</option>
+                                        </select> -->
+                                        <div class="dropdown cq-dropdown" data-name='statuses'>
+                                            <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                carrer levels
+                                              <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="btndropdown">
+                                            {% for level in carrer_levels %}
+                                              <li>
+                                                  <label class="radio-btn" for='{{level.id}}'>
+                                                      <input type="checkbox" name='carrer_levels' value='{{level.id}}' id='{{level.id}}'>
+                                                      {{level.name}}
+                                                  </label>
+                                              </li>
+                                              {% endfor %}
+
+                                            </ul>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="range_wrap">
+                                <label for="amount">salary range:</label>
+                                <div id="slider-range"></div>
+                                <p>
+                                    <input type="text" id="amount" readonly name='salary' style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
+                                </p>
+                            </div>
+                            <div class="reset_btn d-flex">
+                                <input type="submit" value="Search" class="boxed-btn3 w-100 mr-2">
+                                <button  class="boxed-btn3 w-100" type="reset">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="recent_joblist_wrap">
+                    <div class="recent_joblist white-bg ">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h4>Job Listing</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="serch_cat d-flex justify-content-end">
+                                    <!-- <select>
+                                        <option data-display="Most Recent">Most Recent</option>
+                                        <option value="1">Marketer</option>
+                                        <option value="2">Wordpress </option>
+                                        <option value="4">Designer</option>
+                                    </select> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="job_lists m-0">
+                    <div class="row">
+                        {% for job in jobs %}
+                            <div class="col-lg-12 col-md-12">
+                                <div class="single_jobs white-bg d-flex justify-content-between">
+                                    <div class="jobs_left d-flex align-items-center">
+                                        <div class="thumb">
+                                            <img src="{% static 'img/svg_icon/1.svg' %}" alt="">
+                                        </div>
+                                        <div class="jobs_conetent">
+                                            <a href="{% url 'job:job' job.slug %}"><h4>{{job.title }}</h4></a>
+                                            <div class="links_locat d-flex align-items-center">
+                                                {% if  job.city or job.country %}
+                                                <div class="location">
+                                                    <p> <i class="fa fa-map-marker"></i> {{job.city|default:""|title}}
+                                                        {% if  job.city %}
+                                                        ,
+                                                        {% endif %}
+                                                         {{job.country.name|default:""}}
+                                                    </p>
+                                                </div>
+                                                {% endif %}
+                                                <div class="location">
+                                                    <p> <i class="fa fa-clock-o"></i> {{job.job_type|default:"Job type doe's not exist"}}</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="jobs_right">
+                                        <div class="apply_now">
+                                            <a class="heart_mark" href="#"> <i class="fa fa-heart"></i> </a>
+                                            <a href="{% url 'job:job' job.slug %}" class="boxed-btn3">Apply Now</a>
+                                        </div>
+                                        <div class="date">
+                                            <p>Date line: {{job.published_at|date:"d M Y"}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pagination_wrap">
+                                <ul>
+                                    <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
+                                    <li><a href="#"><span>01</span></a></li>
+                                    <li><a href="#"><span>02</span></a></li>
+                                    <li><a href="#"> <i class="ti-angle-right"></i> </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- job_listing_area_end  -->
+
+{% endblock content %}

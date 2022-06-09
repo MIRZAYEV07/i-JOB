@@ -1,0 +1,22 @@
+{% extends 'account/dash_base.html' %}
+{% block title %}CV{% endblock title %}
+{% block content %}
+<div class="content-header">
+  <legend style="margin: 30px auto">
+      Update your CV
+  </legend>
+</div>
+<form action="" method="post" class="special" style="
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+align-items: center;
+flex-flow: column;
+width: 50%;
+margin: auto;
+">
+  {% csrf_token %}
+  {{form}}
+  <input type="submit" value="save CV" class="btn info">
+</form>
+{% endblock content  %}

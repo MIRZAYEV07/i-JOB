@@ -1,0 +1,38 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<legend>{% trans "Sign In" %}</legend>
+
+{% get_providers as socialaccount_providers %}
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit">{% trans "Sign In" %}</button>
+</form>
+
+ <div class="links">
+   <a href="{% url 'account_reset_password' %}">{% trans 'Forget Your Password' %}?</a>
+   <a href="{% url 'account_signup' %}">{% trans 'SignUp' %}</a>
+ </div>
+<hr>
+{% if socialaccount_providers %}
+<div class="socialaccount_ballot">
+  <ul class="socialaccount_providers">
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+</div>
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% endif %}
+
+
+{% endblock %}
